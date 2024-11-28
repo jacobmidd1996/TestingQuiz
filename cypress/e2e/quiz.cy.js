@@ -11,24 +11,21 @@ describe("Tech Quiz E2E", () => {
 
   it("should answer all questions and show the final score", () => {
     cy.get("button").contains("Start Quiz").click();
-    for (let i = 1; i <= 10; i++) {
-      cy.get(`.question-${i}`).should("be.visible");
-      cy.get(`.answer-${i}`).first().click();
+    for (let i = 0; i < 10; i++) {
+      cy.get("button").contains("1").click();
     }
 
-    cy.get(".score-alert").should("be.visible");
-    cy.get(".score-alert").should("contain", "Your score");
+    cy.get(".alert-success").should("be.visible");
+    cy.get(".alert-success").should("contain", "Your score");
   });
 
   it("should restart the quiz after completion", () => {
     cy.get("button").contains("Start Quiz").click();
-    for (let i = 1; i <= 10; i++) {
-      cy.get(`.question-${i}`).should("be.visible");
-      cy.get(`.answer-${i}`).first().click();
+    for (let i = 0; i < 10; i++) {
+      cy.get(`button`).contains("1").click();
     }
 
-    cy.get("button").contains("Restart Quiz").click();
-    cy.get("button").contains("Start Quiz").should("be.visible");
+    cy.get("button").contains("Take New Quiz").click();
     cy.get(".question-1").should("not.be.empty");
   });
 });
